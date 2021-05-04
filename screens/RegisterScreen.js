@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useLayoutEffect} from "react";
 import { StyleSheet, View } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
@@ -9,6 +9,13 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+
+  useLayoutEffect(() =>
+  {
+    navigation.setOptions({
+      headerBackTitle: "Back to Login",
+    });
+  }, [navigation]);
 
   const register = () => {};
 
@@ -49,10 +56,12 @@ const RegisterScreen = ({ navigation }) => {
           onSubmitEditing={register}
         />
       </View>
-      <View style={{ height: 100 }} />
+      
       <Button containerStyle={styles.button} raised
         onPress={register} title="Register"
       />
+
+      <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
   );
 };
