@@ -49,6 +49,7 @@ const RegisterScreen = ({ navigation }) => {
           onSubmitEditing={register}
         />
       </View>
+      <View style={{ height: 100 }} />
       <Button containerStyle={styles.button} raised
         onPress={register} title="Register"
       />
@@ -59,6 +60,18 @@ const RegisterScreen = ({ navigation }) => {
 export default RegisterScreen;
 
 const styles = StyleSheet.create({
-  container: {},
-  button: {},
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    backgroundColor: "white",
+  },
+  button: {
+    width: 200,
+    marginTop: 10,
+  },
+  inputContainer: {
+    width: 300,
+  },
 });
