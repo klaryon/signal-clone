@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
-import { Button, Input } from "react-native-elements";
+import { Button, Input, Text } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
 
 const RegisterScreen = ({ navigation }) => {
@@ -49,6 +49,9 @@ const RegisterScreen = ({ navigation }) => {
           onSubmitEditing={register}
         />
       </View>
+      <Button containerStyle={styles.button} raised
+        onPress={register} title="Register"
+      />
     </KeyboardAvoidingView>
   );
 };
@@ -57,4 +60,5 @@ export default RegisterScreen;
 
 const styles = StyleSheet.create({
   container: {},
+  button: {},
 });
