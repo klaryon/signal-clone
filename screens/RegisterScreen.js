@@ -1,8 +1,9 @@
-import React, {useState, useLayoutEffect} from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { KeyboardAvoidingView } from "react-native";
 import { Button, Input, Text } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
+import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -10,14 +11,25 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  useLayoutEffect(() =>
-  {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerBackTitle: "Back to Login",
     });
   }, [navigation]);
 
-  const register = () => {};
+  const register = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        authUser.user.updateProfile({
+          displayName: name,
+          photoURL:
+            imageUrl ||
+            "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
+        });
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
@@ -56,9 +68,12 @@ const RegisterScreen = ({ navigation }) => {
           onSubmitEditing={register}
         />
       </View>
-      
-      <Button containerStyle={styles.button} raised
-        onPress={register} title="Register"
+
+      <Button
+        containerStyle={styles.button}
+        raised
+        onPress={register}
+        title="Register"
       />
 
       <View style={{ height: 100 }} />
