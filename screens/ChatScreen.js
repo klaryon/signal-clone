@@ -17,14 +17,36 @@ const ChatScreen = ({ navigation, route }) => {
               uri: "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
             }}
           />
-          <Text style={{ color:"white", marginLeft: 10, fontWeight: "700" }}>{route.params.chatName}</Text>
+          <Text style={{ color: "white", marginLeft: 10, fontWeight: "700" }}>
+            {route.params.chatName}
+          </Text>
         </View>
-        ),
-        headerLeft: () => (
-        <TouchableOpacity style={{marginLeft: 10}} onPress={navigation.goBack}>
-            <AntDesign name="arrowleft" size={24} color="white" />
+      ),
+      headerLeft: () => (
+        <TouchableOpacity
+          style={{ marginLeft: 10 }}
+          onPress={navigation.goBack}
+        >
+          <AntDesign name="arrowleft" size={24} color="white" />
         </TouchableOpacity>
-        )
+      ),
+      headerRight: () => (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: 80,
+            marginRight: 20,
+          }}
+        >
+          <TouchableOpacity>
+            <FontAwesome name="video-camera" size={24} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="call" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
+      ),
     });
   }, [navigation]);
   return (
