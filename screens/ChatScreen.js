@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   TouchableOpacity,
   StyleSheet,
@@ -8,13 +8,15 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TextInput,
-  Platform
+  Platform,
 } from "react-native";
 import { Avatar } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 
 const ChatScreen = ({ navigation, route }) => {
+  const [input, setInput] = useState("");
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Chat",
@@ -60,6 +62,9 @@ const ChatScreen = ({ navigation, route }) => {
       ),
     });
   }, [navigation]);
+
+  const sendMessage = (message) => {};
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
@@ -69,17 +74,20 @@ const ChatScreen = ({ navigation, route }) => {
         keyboardVerticalOffset={90}
       >
         <>
-            <ScrollView>
-                 {/* Chat goes here */}
-            </ScrollView>
-            <View styles={styles.footer}>
-                <TextInput
-                placeholder="Signal Message"
-                />
-            </View>
+          <ScrollView>{/* Chat goes here */}</ScrollView>
+          <View styles={styles.footer}>
+            <TextInput
+              value={input}
+              onChangeText={(text) => setInput(text)}
+              placeholder="Signal Message"
+              style={styles.textInput}
+            />
+          </View>
         </>
       </KeyboardAvoidingView>
-      <Text>{route.params.chatName}</Text>
+      <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
+        <Ionicons name="send" size={24} color="#2B68E6" />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -87,6 +95,21 @@ const ChatScreen = ({ navigation, route }) => {
 export default ChatScreen;
 
 const styles = StyleSheet.create({
-    container: {},
-    footer: {}
+  container: { flex: 1 },
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    padding: 15,
+  },
+  textInput: {
+    bottom: 0,
+    height: 40,
+    flex: 1,
+    marginRight: 15,
+    backgroundColor: "#ECECEC",
+    padding: 10,
+    color: "grey",
+    borderRadius: 30,
+  },
 });
