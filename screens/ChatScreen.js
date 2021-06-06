@@ -1,7 +1,8 @@
 import React, { useLayoutEffect } from "react";
-import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
+import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { Avatar } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
+import {StatusBar} from "expo-status-bar";
 
 const ChatScreen = ({ navigation, route }) => {
   useLayoutEffect(() => {
@@ -50,9 +51,10 @@ const ChatScreen = ({ navigation, route }) => {
     });
   }, [navigation]);
   return (
-    <View>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+          <StatusBar style="light" />
       <Text>{route.params.chatName}</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
