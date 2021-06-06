@@ -1,8 +1,18 @@
 import React, { useLayoutEffect } from "react";
-import { TouchableOpacity, StyleSheet, Text, View, SafeAreaView } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  ScrollView,
+  TextInput,
+  Platform
+} from "react-native";
 import { Avatar } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
-import {StatusBar} from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 
 const ChatScreen = ({ navigation, route }) => {
   useLayoutEffect(() => {
@@ -51,8 +61,24 @@ const ChatScreen = ({ navigation, route }) => {
     });
   }, [navigation]);
   return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-          <StatusBar style="light" />
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <StatusBar style="light" />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        keyboardVerticalOffset={90}
+      >
+        <>
+            <ScrollView>
+                 {/* Chat goes here */}
+            </ScrollView>
+            <View styles={styles.footer}>
+                <TextInput
+                placeholder="Signal Message"
+                />
+            </View>
+        </>
+      </KeyboardAvoidingView>
       <Text>{route.params.chatName}</Text>
     </SafeAreaView>
   );
@@ -60,4 +86,7 @@ const ChatScreen = ({ navigation, route }) => {
 
 export default ChatScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {},
+    footer: {}
+});
